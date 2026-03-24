@@ -1,5 +1,6 @@
+-- 1. Wait for the core game to load
 if not game:IsLoaded() then
-    game.Loaded:Wait() -- Wait if it's not loaded yet
+    game.Loaded:Wait()
 end
 
 local Players = game:GetService("Players")
@@ -8,7 +9,17 @@ local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
 local VirtualUser = game:GetService("VirtualUser")
 
+-- 2. CRITICAL FIX: Wait for the LocalPlayer to actually exist
 local LP = Players.LocalPlayer
+while not LP do
+    task.wait()
+    LP = Players.LocalPlayer
+end
+
+-- Optional but recommended: Give the server a tiny buffer to initialize the Character
+if not LP.Character then
+    LP.CharacterAdded:Wait()
+end
 
 local PLACE_MAIN = 93249115521759
 local PLACE_DESERT = 76471028557198
