@@ -183,5 +183,20 @@ task.spawn(function()
 end)
 
 if game.PlaceId == PLACE_DESERT then
+    -- 1. Wait for leaderstats to exist (proof the server loaded your data)
+    local ls = LP:WaitForChild("leaderstats", 15)
+    if ls then
+        ls:WaitForChild("Slaps", 15)
+    end
+    
+    -- 2. Wait for your character to physically load into the map
+    if not LP.Character then 
+        LP.CharacterAdded:Wait() 
+    end
+    
+    -- 3. Give the server's internal scripts 2 seconds of breathing room to finish setting up
+    task.wait(2)
+    
+    -- Now it is 100% safe to start firing RemoteFunctions
     farmDesert()
 end
