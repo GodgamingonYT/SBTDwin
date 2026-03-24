@@ -10,7 +10,7 @@ local PLACE_MAIN = 93249115521759
 local PLACE_DESERT = 76471028557198
 
 local function queueScript()
-    local url = "https://pastefy.app/bHPCVyie/raw"
+    local url = "https://raw.githubusercontent.com/GodgamingonYT/SBTDwin/refs/heads/main/autowin"
     if syn and syn.queue_on_teleport then
         syn.queue_on_teleport('loadstring(game:HttpGet("'..url..'"))()')
     elseif queue_on_teleport then
